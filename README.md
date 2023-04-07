@@ -46,7 +46,7 @@ When faced with the Airflow login screen, you can log in using **airflow** as bo
 
 You can now see the DAG listed on the homescreen.
 
-To run it, click the "play" button, and click **Trigger DAG**
+The process runs automatically upon startup, however, to run it manually, you can click the "play" button, and click **Trigger DAG**
 
 ![Triggering a DAG](./read-me/02_trigger-dag.png)
 

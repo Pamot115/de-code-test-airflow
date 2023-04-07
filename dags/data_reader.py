@@ -7,14 +7,11 @@ from modules.csv_process import CSVReader
 from modules.table_generator import TableGenerator
 from modules.db_operator import DbOperator
 
-start_date = dt.now() + timedelta(minutes=5)
-
 args = {
     "owner": "Pedro Montes de Oca",
-    "start_date": start_date,
+    "start_date": dt(2023, 4, 1),
     "retries": 1,
-    "retry_delay": timedelta(minutes=5),
-    "schedule_interval": '@once'
+    "retry_delay": timedelta(minutes=5)
 }
 
 # Creating the DAG Object
@@ -22,7 +19,8 @@ with DAG(
     dag_id = "csv_etl",
     tags=["etl_example"],
     default_args = args,
-    is_paused_upon_creation = False
+    is_paused_upon_creation = False,
+    schedule_interval= '@once'
     ) as dag:
 
     # Calling up each part of the process
