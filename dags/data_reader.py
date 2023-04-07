@@ -1,22 +1,27 @@
 # External libraries
 from airflow.models.dag import DAG
-from datetime import datetime as dt
+from datetime import datetime as dt, timedelta
 
 # Internal references
 from modules.csv_process import CSVReader
 from modules.table_generator import TableGenerator
 from modules.db_operator import DbOperator
 
-args = {"owner": "Pedro Montes de Oca"}
+start_date = dt.now() + timedelta(minutes=5)
+
+args = {
+    "owner": "Pedro Montes de Oca",
+    "start_date": start_date,
+    "retries": 1,
+    "retry_delay": timedelta(minutes=5),
+    "schedule_interval": '@once'
+}
 
 # Creating the DAG Object
 with DAG(
     dag_id = "csv_etl",
-    start_date = dt.today(),
-    catchup=False,
     tags=["etl_example"],
     default_args = args,
-    schedule_interval=None,
     is_paused_upon_creation = False
     ) as dag:
 
